@@ -47,17 +47,17 @@ def mapToZone(parts):
                     pickup_time.tm_mday)
 
             # Trips during Sandy
-            if (date>=(2012, 10, 28)) and (date<(2012, 10, 29)):
-                passenger_count = int(fields[3])
-                pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
-                dropoff_location = geom.Point(proj(float(fields[7]), float(fields[8])))
+           
+            passenger_count = int(fields[3])
+            pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
+            dropoff_location = geom.Point(proj(float(fields[7]), float(fields[8])))
 
-                pickup_zone = findZone(pickup_location, index, zones)
-                dropoff_zone = findZone(dropoff_location, index, zones)
-                dow = pickup_time.tm_wday
-                tod = pickup_time.tm_hour
+            pickup_zone = findZone(pickup_location, index, zones)
+            dropoff_zone = findZone(dropoff_location, index, zones)
+            dow = pickup_time.tm_wday
+            tod = pickup_time.tm_hour
 
-                if pickup_zone>=0 and dropoff_zone>=0:
+            if pickup_zone>=0 and dropoff_zone>=0:
                     yield ((dow, tod, passenger_count, pickup_zone, dropoff_zone), 1)
 
 if __name__=='__main__':
