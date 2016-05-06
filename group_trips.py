@@ -68,6 +68,8 @@ if __name__=='__main__':
     sc = pyspark.SparkContext()
 
     trips = sc.textFile(','.join(sys.argv[1:-1]))
+    trips = lines.filter(lambda x: not x.startswith('vendor_id',))
+    
 
     output = trips \
         .mapPartitions(mapToZone) \
