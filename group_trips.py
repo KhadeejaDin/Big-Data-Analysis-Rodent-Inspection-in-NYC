@@ -40,37 +40,35 @@ def mapToZone(parts):
 
     for line in parts:
         fields = line.strip().split(',')
-        if all((fields[1],fields[3],fields[5],fields[6],fields[7],fields[8])):
+        if all((fields[1],fields[3],fields[5],fields[6],fields[9],fields[10])):
             pickup_time = datetime.datetime.strptime(fields[1], "%Y-%m-%d %H:%M:%S").timetuple()
             date = (pickup_time.tm_year,
                     pickup_time.tm_mon,
                     pickup_time.tm_mday)
 
             # Trips during Sandy
-           
-            passenger_count = int(fields[3])
-            pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
-            dropoff_location = geom.Point(proj(float(fields[7]), float(fields[8])))
+            if (date>=(2011, 05, 01)) and (date<=(2011, 05, 31)):
+                passenger_count = int(fields[3])
+                pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
+                dropoff_location = geom.Point(proj(float(fields[9]), float(fields[10])))
 
-            pickup_zone = findZone(pickup_location, index, zones)
-            dropoff_zone = findZone(dropoff_location, index, zones)
-            dow = pickup_time.tm_wday
-            tod = pickup_time.tm_hour
+                pickup_zone = findZone(pickup_location, index, zones)
+                dropoff_zone = findZone(dropoff_location, index, zones)
+                dow = pickup_time.tm_wday
+                tod = pickup_time.tm_hour
 
-            if pickup_zone>=0 and dropoff_zone>=0:
+                if pickup_zone>=0 and dropoff_zone>=0:
                     yield ((dow, tod, passenger_count, pickup_zone, dropoff_zone), 1)
 
-if __name__=='__main__':
+if __name__=='__main__': 
     if len(sys.argv)<3:
         print "Usage: <input files> <output path>"
         sys.exit(-1)
 
     sc = pyspark.SparkContext()
 
-    lines = sc.textFile(','.join(sys.argv[1:-1]))
-    trips = lines.filter(lambda x: not x.startswith('vendor_id',))
-    
-
+    lines = sc.textFile(','.join(sys.argv[1:-1])).cache()
+    trips = lines.filter(lambda x: not x.startswith('vendor_id'))
     output = trips \
         .mapPartitions(mapToZone) \
         .reduceByKey(lambda a, b: a+b, 8) \
