@@ -72,8 +72,6 @@ if __name__=='__main__':
     trips = lines.filter(lambda x: not x.startswith('vendor_id') and x != '')
    
     output = trips \
-        .mapPartitions(mapToZone) \ 
-        .reduceByKey(lambda a, b: a+b, 8) \
-        ;        
+        .mapPartitions(mapToZone) 
     
     output.saveAsTextFile(sys.argv[-1])
