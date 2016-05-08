@@ -41,13 +41,12 @@ def findBoroughZone(p, index, zones):
 
 def top3(data):
     return heapq.nlargest(3, data, key=lambda k: k[1])
-    
+
 def mapToZone(parts):
     import pyproj
     import shapely.geometry as geom
     proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
-    n_index, n_zones = indexZones('neighborhoods.geojson')
-    b_index, b_zones = indexZones('boroughs.geojson')
+    index, zones = indexZones('neighborhoods.geojson')
 
     for line in parts:
 
@@ -64,8 +63,8 @@ def mapToZone(parts):
             pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
             dropoff_location = geom.Point(proj(float(fields[9]), float(fields[10])))
 
-            pickup_zone = findNeighborhoodZone(pickup_location, n_index, n_zones)
-            dropoff_zone = findBoroughZone(dropoff_location, b_index, b_zones)
+            pickup_zone = findNeighborhoodZone(pickup_location, index, zones)
+            dropoff_zone = findBoroughZone(dropoff_location, index, zones)
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
 
