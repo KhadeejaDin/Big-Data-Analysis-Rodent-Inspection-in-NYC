@@ -3,7 +3,7 @@ import operator
 import os
 import sys
 import time
-
+import heapq
 import pyspark
 
 ### trip_YEAR.csv
@@ -38,7 +38,8 @@ def findBoroughZone(p, index, zones):
         if any(map(lambda x: x.contains(p), zones.geometry[idx])):
             return zones['borough'][idx]
     return -1
-
+def top3(data):
+    return heapq.nlargest(3, data, key=lambda k: k[1])
 def mapToZone(parts):
     import pyproj
     import shapely.geometry as geom
