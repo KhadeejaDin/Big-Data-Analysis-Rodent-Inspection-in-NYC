@@ -31,23 +31,26 @@ def findNeighborhoodZone(p, index, zones):
         if any(map(lambda x: x.contains(p), zones.geometry[idx])):
             return zones['neighborhood'][idx]
     return -1
-    
+
 def findBoroughZone(p, index, zones):
     match = index.intersection((p.x, p.y, p.x, p.y))
     for idx in match:
         if any(map(lambda x: x.contains(p), zones.geometry[idx])):
             return zones['borough'][idx]
     return -1
+
 def top3(data):
     return heapq.nlargest(3, data, key=lambda k: k[1])
+    
 def mapToZone(parts):
     import pyproj
     import shapely.geometry as geom
-    proj = pyproj.Proj(init="epsg:2263", preserve_units=True)    
-    index, zones = indexZones('neighborhoods.geojson')
+    proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
+    n_index, n_zones = indexZones('neighborhoods.geojson')
+    b_index, b_zones = indexZones('boroughs.geojson')
 
     for line in parts:
-       
+
         fields = line.strip().split(',')
         if all((fields[5],fields[6],fields[9],fields[10])):
             # pickup_time = datetime.datetime.strptime(fields[1], "%Y-%m-%d %H:%M:%S").timetuple()
@@ -61,14 +64,14 @@ def mapToZone(parts):
             pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
             dropoff_location = geom.Point(proj(float(fields[9]), float(fields[10])))
 
-            pickup_zone = findNeighborhoodZone(pickup_location, index, zones)
-            dropoff_zone = findBoroughZone(dropoff_location, index, zones)
+            pickup_zone = findNeighborhoodZone(pickup_location, n_index, n_zones)
+            dropoff_zone = findBoroughZone(dropoff_location, b_index, b_zones)
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
 
             #if pickup_zone>=0 and dropoff_zone>=0:
             yield (( pickup_zone, dropoff_zone), 1)
-            
+
 if __name__=='__main__':
     if len(sys.argv)<3:
         print "Usage: <input files> <output path>"
@@ -78,7 +81,7 @@ if __name__=='__main__':
 
     lines = sc.textFile(','.join(sys.argv[1:-1]))
     trips = lines.filter(lambda x: not x.startswith('vendor_id') and x != '')
-   
-    output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)  
-    
+
+    output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
+
     output.saveAsTextFile(sys.argv[-1])
