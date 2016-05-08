@@ -25,11 +25,18 @@ def indexZones(shapeFilename):
         index.insert(idx, geometry.bounds)
     return (index, zones)
 
-def findZone(p, index, zones):
+def findNeighborhoodZone(p, index, zones):
     match = index.intersection((p.x, p.y, p.x, p.y))
     for idx in match:
         if any(map(lambda x: x.contains(p), zones.geometry[idx])):
-            return idx
+            return zones['neighborhood'][idx]
+    return -1
+    
+def findBoroughZone(p, index, zones):
+    match = index.intersection((p.x, p.y, p.x, p.y))
+    for idx in match:
+        if any(map(lambda x: x.contains(p), zones.geometry[idx])):
+            return zones['borough'][idx]
     return -1
 
 def mapToZone(parts):
@@ -53,13 +60,13 @@ def mapToZone(parts):
             pickup_location  = geom.Point(proj(float(fields[5]), float(fields[6])))
             dropoff_location = geom.Point(proj(float(fields[9]), float(fields[10])))
 
-            pickup_zone = findZone(pickup_location, index, zones)
-            dropoff_zone = findZone(dropoff_location, index, zones)
+            pickup_zone = findNeighborhoodZone(pickup_location, index, zones)
+            dropoff_zone = findBoroughZone(dropoff_location, index, zones)
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
 
-            if pickup_zone>=0 and dropoff_zone>=0:
-                    yield (( pickup_zone, dropoff_zone), 1)
+            #if pickup_zone>=0 and dropoff_zone>=0:
+            yield (( pickup_zone, dropoff_zone), 1)
             
 if __name__=='__main__':
     if len(sys.argv)<3:
@@ -71,7 +78,6 @@ if __name__=='__main__':
     lines = sc.textFile(','.join(sys.argv[1:-1]))
     trips = lines.filter(lambda x: not x.startswith('vendor_id') and x != '')
    
-    output = trips \
-        .mapPartitions(mapToZone) 
+    output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)  
     
     output.saveAsTextFile(sys.argv[-1])
