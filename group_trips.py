@@ -3,8 +3,8 @@ import operator
 import os
 import sys
 import time
-import pyspark
 import heapq
+import pyspark
 
 ### trip_YEAR.csv
 
@@ -28,16 +28,17 @@ def indexZones(shapeFilename):
 def findNeighborhoodZone(p, index, zones):
     match = index.intersection((p.x, p.y, p.x, p.y))
     for idx in match:
-        #if any(map(lambda x: x.contains(p), zones.geometry[idx])):
+        if any(map(lambda x: x.contains(p), zones.geometry[idx])):
             return zones['neighborhood'][idx]
     return -1
 
 def findBoroughZone(p, index, zones):
     match = index.intersection((p.x, p.y, p.x, p.y))
     for idx in match:
-        #if any(map(lambda x: x.contains(p), zones.geometry[idx])):
+        if any(map(lambda x: x.contains(p), zones.geometry[idx])):
             return zones['borough'][idx]
     return -1
+
 
 def mapToZone(parts):
     import pyproj
@@ -64,9 +65,9 @@ def mapToZone(parts):
             dropoff_zone = findBoroughZone(dropoff_location, index, zones)
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
-            if pickup_zone != -1 and dropoff_zone != -1:
-                yield (( pickup_zone, dropoff_zone), 1)
 
+            if pickup_zone != -1 and dropoff_zone != -1:
+                yield (( dropoff_zone, pickup_zone), 1)
 
 if __name__=='__main__':
     if len(sys.argv)<3:
@@ -81,4 +82,3 @@ if __name__=='__main__':
     output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b).map(lambda x:(x[0][0],(x[0][1],x[1]))).groupByKey().map(lambda x : (x[0], sorted(list(x[1]),key=lambda y: -y[1])[:3]))
 
     output.saveAsTextFile(sys.argv[-1])
-
