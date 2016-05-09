@@ -3,8 +3,8 @@ import operator
 import os
 import sys
 import time
-import heapq
 import pyspark
+import heapq
 
 ### trip_YEAR.csv
 
@@ -39,9 +39,6 @@ def findBoroughZone(p, index, zones):
             return zones['borough'][idx]
     return -1
 
-def top3(data):
-    return heapq.nlargest(3, data, key=lambda k: k[1])
-
 def mapToZone(parts):
     import pyproj
     import shapely.geometry as geom
@@ -67,9 +64,8 @@ def mapToZone(parts):
             dropoff_zone = findBoroughZone(dropoff_location, index, zones)
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
-
-            if pickup_zone != '-1' and dropoff_zone != '-1':
-                yield (( pickup_zone, dropoff_zone), 1)
+            
+            yield (( pickup_zone, dropoff_zone), 1)
 
 if __name__=='__main__':
     if len(sys.argv)<3:
@@ -81,5 +77,5 @@ if __name__=='__main__':
     lines = sc.textFile(','.join(sys.argv[1:-1]))
     trips = lines.filter(lambda x: not x.startswith('vendor_id') and x != '')
 
-    output = (trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
+    output1 = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
     output.saveAsTextFile(sys.argv[-1])
