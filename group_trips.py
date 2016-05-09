@@ -68,7 +68,7 @@ def mapToZone(parts):
             #    dow = pickup_time.tm_wday
             #    tod = pickup_time.tm_hour
 
-            #if pickup_zone>=0 and dropoff_zone>=0:
+            if pickup_zone>=0 and dropoff_zone>=0:
             yield (( pickup_zone, dropoff_zone), 1)
 
 if __name__=='__main__':
