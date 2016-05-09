@@ -39,9 +39,6 @@ def findBoroughZone(p, index, zones):
             return zones['borough'][idx]
     return -1
 
-def groupByBorough(trips):
-    sorted(trips, key = lambda x: [0][1])
-
 def top3(data):
     return heapq.nlargest(3, data, key=lambda k: k[1])
 
@@ -85,6 +82,4 @@ if __name__=='__main__':
     trips = lines.filter(lambda x: not x.startswith('vendor_id') and x != '')
 
     output = (trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
-    sorted(output, key = lambda x: [0][1])
-
     output.saveAsTextFile(sys.argv[-1])
