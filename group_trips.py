@@ -41,8 +41,8 @@ def findBoroughZone(p, index, zones):
 
 
 def mapToZone(parts):
-    import pyproj
-    import shapely.geometry as geom
+    import pyproj #only to conver long lat to x y in feets
+    import shapely.geometry as geom #only to convert (x,y) to Point (x y)
     proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
     index, zones = indexZones('neighborhoods.geojson')
 
