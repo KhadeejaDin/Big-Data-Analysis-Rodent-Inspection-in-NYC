@@ -31,14 +31,14 @@ def mapToZone(parts):
     proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
     index, zones = indexZones('SubwayStations.geojson')
     #return zones.geometry
-    for line in parts: #convert long lat to x y
+    for line in parts:
         fields = line.strip().split(',')
-        #50 is lat, #51 is long
-        if all((fields[50],fields[51])):
-            location  = geom.Point(proj(float(fields[51]), float(fields[50])))
+        if all((fields[13],fields[14])) and (fields[17] != 'Passed Inspection'):
+            location  = geom.Point(proj(float(fields[14]), float(fields[13])))
+            #location  = geom.Point(float(fields[11]), float(fields[12]))
             zone = findZone(location, index, zones)
-            if zone != -1:
-                yield (zone, 1)
+            if zone!= -1:
+                yield (str(zone), 1)
 
 if __name__=='__main__':
     if len(sys.argv)<3:
@@ -47,7 +47,7 @@ if __name__=='__main__':
 
     sc = pyspark.SparkContext()
     lines = sc.textFile(','.join(sys.argv[1:-1]))
-    trips = lines.filter(lambda x: not x.startswith('Unique Key') and x != '')
+    trips = lines.filter(lambda x: not x.startswith('INSPECTION_TYPE') and x != '')
 
     output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
     output.saveAsTextFile(sys.argv[-1])
