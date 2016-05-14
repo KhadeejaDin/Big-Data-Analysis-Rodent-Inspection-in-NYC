@@ -11,7 +11,7 @@ def indexZones(shapeFilename):  ##creates rtree
     import geopandas as gpd
     index = rtree.Rtree()
     zones = gpd.read_file(shapeFilename).to_crs(fiona.crs.from_epsg(2263))
-    g = zones.geometry.buffer(900)
+    g = zones.geometry.buffer(450)  #450 is radius
     zones = zones.set_geometry(g)
     for idx,geometry in enumerate(zones.geometry):
         index.insert(idx, geometry.bounds)
@@ -22,7 +22,7 @@ def findZone(p, index, zones):
     #return match
     for idx in match:
         if (zones.geometry[idx]).contains(p):
-            return zones['name'][idx]
+            return zones['name'][idx] + ' (' + zones['line'][idx] + ')'
     return -1
 
 def mapToZone(parts):
@@ -37,7 +37,8 @@ def mapToZone(parts):
         if all((fields[50],fields[51])):
             location  = geom.Point(proj(float(fields[51]), float(fields[50])))
             zone = findZone(location, index, zones)
-            yield (zone, 1)
+            if zone != -1:
+                yield (zone, 1)
 
 if __name__=='__main__':
     if len(sys.argv)<3:
