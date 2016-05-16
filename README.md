@@ -16,3 +16,6 @@
 <p> Command to mereg csv files:
 cat *.csv >merge.csv
 </p>
+
+##Contributor:
+Khadeeja Din, Xue Wei Fan, Davide Libi-Bourne, and John Settineri
