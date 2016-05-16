@@ -17,5 +17,8 @@
 cat *.csv >merge.csv
 </p>
 
-##Contributor:
-Khadeeja Din, Xue Wei Fan, Davide Libi-Bourne, and John Settineri
+##Contributors:
+Khadeeja Din <br>
+Xue Wei Fan<br>
+Davide Libi-Bourne<br>
+John Settineri
