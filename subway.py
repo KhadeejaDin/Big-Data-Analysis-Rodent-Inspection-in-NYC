@@ -1,9 +1,10 @@
-import pyspark
 import datetime
 import operator
 import os
 import sys
 import time
+
+import pyspark
 
 def indexZones(shapeFilename):  ##creates rtree
     import rtree
@@ -19,7 +20,6 @@ def indexZones(shapeFilename):  ##creates rtree
 
 def findZone(p, index, zones):
     match = index.intersection((p.x, p.y, p.x, p.y))
-    #return match
     for idx in match:
         if (zones.geometry[idx]).contains(p):
             return zones['name'][idx] + ' (' + zones['line'][idx] + ')'
@@ -29,7 +29,7 @@ def mapToZone(parts):
     import pyproj #only to conver long lat to x y in feets
     import shapely.geometry as geom #only to convert (x,y) to Point (x y)
     proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
-    index, zones = indexZones('Subway Stations.geojson')
+    index, zones = indexZones('SubwayStations.geojson')
     #return zones.geometry
     for line in parts: #convert long lat to x y
         fields = line.strip().split(',')
@@ -46,7 +46,8 @@ if __name__=='__main__':
         sys.exit(-1)
 
     sc = pyspark.SparkContext()
-    lines = sc.textFile(','.join(sys.argv[1:-1]))
+
+    trips = sc.textFile(','.join(sys.argv[1:-1]))
     trips = lines.filter(lambda x: not x.startswith('Unique Key') and x != '')
 
     output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
