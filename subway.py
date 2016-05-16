@@ -37,8 +37,8 @@ def mapToZone(parts):
         if all((fields[50],fields[51])):
             location  = geom.Point(proj(float(fields[51]), float(fields[50])))
             zone = findZone(location, index, zones)
-            if zone != -1:
-                yield (zone, 1)
+            if zone >= 0:
+                yield (str(zone), 1)
 
 if __name__=='__main__':
     if len(sys.argv)<3:
@@ -47,7 +47,7 @@ if __name__=='__main__':
 
     sc = pyspark.SparkContext()
 
-    trips = sc.textFile(','.join(sys.argv[1:-1]))
+    lines = sc.textFile(','.join(sys.argv[1:-1]))
     trips = lines.filter(lambda x: not x.startswith('Unique Key') and x != '')
 
     output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
