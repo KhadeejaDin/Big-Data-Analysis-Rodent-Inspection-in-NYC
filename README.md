@@ -5,5 +5,10 @@
 
 </p>
 
+<p> Subway:
+./submit_Subway.sh subway.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output output.txt 32
+</p>
 
-#./submit.sh subway.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output output.txt 32
+<p> Building: 
+./submit_Building.sh Mn_BuildingAge_Rat.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv outputMn outputMn.txt 22
+</p>
