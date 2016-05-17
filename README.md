@@ -5,10 +5,10 @@
 
 </p>
 ## Chart from our final result shows the positive correlation between number of restaurants and 311 call complaints for rats in neighborhood
-![alt tag](/Restaurant_VS_Rat.png)
+![alt tag](image/Restaurant_VS_Rat.png)
 
 ## Chart from our final result shows the positive correlation between building age and number of 311 call complaints for rats in New York city
-![alt tag](/BuildingAge_VS_Rat.png)
+![alt tag](image/BuildingAge_VS_Rat.png)
 
 ## Commands used to run this big data project:
 #### Commands used to connect to NYU Cusp cluster:
