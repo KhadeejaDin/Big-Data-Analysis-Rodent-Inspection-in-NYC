@@ -4,10 +4,10 @@
     Rodents and other pests are often a big problem for businesses in New York City. Pest complaints often lead to poor Health Inspection grades, poor customer satisfaction, and poor food hygiene. The goal of this project is to track their locations in NYC neighboorhoods by using the New York City 311 complaint data and sorting it for rodent inspections. Once we find the neighborhoods that rodents often congregate, the project will focus on creating a heatmap of the most common locations for rodents in the city. Hopefully, when businesses move to other neighboorhoods, they will use this data to see whether or not the area is optimal due to high rodent populations. 
 
 </p>
-## Chart from our final result shows the postive correlation between number of restaurants and 311 call complaints for rats in neighborhood
+## Chart from our final result shows the positive correlation between number of restaurants and 311 call complaints for rats in neighborhood
 ![alt tag](/Restaurant_VS_Rat.png)
 
-## Chart from our final result shows the postive correlation between age of building and number of 311 call complaints for rats in New York city
+## Chart from our final result shows the positive correlation between building age and number of 311 call complaints for rats in New York city
 ![alt tag](/BuildingAge_VS_Rat.png)
 
 ## Commands used to run this big data project:
