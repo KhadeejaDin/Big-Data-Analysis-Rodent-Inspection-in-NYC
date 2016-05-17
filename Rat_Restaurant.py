@@ -67,13 +67,13 @@ if __name__=='__main__':
 
     sc = pyspark.SparkContext()
 
-    lines = sc.textFile(','.join(sys.argv[1:-1]))
-    trips = lines.filter(lambda x: not x.startswith('Unique Key') and x != '')
-
-    joinResult = call.join(restaurant)
-    call = trips.mapPartitions(mapToZone2).reduceByKey(lambda a, b: a+b)
-    restaurant = joinResult.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
-
-    joinResult = call.join(restaurant)
-
-    output.saveAsTextFile(sys.argv[-1])
+    call = sc.textFile(','.join(sys.argv[1]))
+    call = call.filter(lambda x: not x.startswith('Unique Key') and x != '')
+    callOuput = call.mapPartitions(mapToZone2).reduceByKey(lambda a, b: a+b) 
+    
+    restaurant = sc.textFile(','.join(sys.argv[2]), use_unicode=False)
+    restaurantOutput = restaurant.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
+  
+    joinResult = callOuput.join(restaurantOutput)
+    
+    joinResult.saveAsTextFile(sys.argv[-1])
