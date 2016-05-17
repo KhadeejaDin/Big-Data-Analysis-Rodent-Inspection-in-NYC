@@ -11,6 +11,6 @@ HD=hadoop
 SP=spark-submit
 
 $HD fs -rm -r -skipTrash $OUTPUT
-$SP --name "$NAME" --num-executors $NUM_EXECS --files SubwayStations.geojson $PYTHON_FILE $INPUT $OUTPUT
+$SP --name "$NAME" --num-executors $NUM_EXECS --files neighborhoods.geojson $PYTHON_FILE $INPUT $OUTPUT
 rm -f $LOCAL_OUTPUT
 $HD fs -cat $OUTPUT/part*  | tr -d '() ' > $LOCAL_OUTPUT
