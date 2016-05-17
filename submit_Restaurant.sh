@@ -5,12 +5,12 @@ OTHERS=(${@:$#-2})
 OUTPUT=${OTHERS[@]:0:1}
 LOCAL_OUTPUT=${OTHERS[@]:1:1}
 NUM_EXECS=${OTHERS[@]:2:1}
-NAME="BDMA Taxi Grouping"
+NAME="BDMA Project"
 
 HD=hadoop
 SP=spark-submit
 
 $HD fs -rm -r -skipTrash $OUTPUT
-$SP --name "$NAME" --num-executors $NUM_EXECS --files hdfs:///gws/classes/bdma/ccny/groups/8/boroughsBuildingAge/boroughs.csv $PYTHON_FILE $INPUT $OUTPUT
+$SP --name "$NAME" --num-executors $NUM_EXECS --files SubwayStations.geojson $PYTHON_FILE $INPUT $OUTPUT
 rm -f $LOCAL_OUTPUT
 $HD fs -cat $OUTPUT/part*  | tr -d '() ' > $LOCAL_OUTPUT
