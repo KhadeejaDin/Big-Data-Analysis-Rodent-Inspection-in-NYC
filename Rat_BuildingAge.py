@@ -22,7 +22,7 @@ def indexZones(buildingfiles):  ##creates rtree
         for row in reader:
             
         #if row[2]!='s':
-            if row[0] =='Borough': continue
+            if row[0].strip() =='Borough': continue
             if row[58] !='0':
                 if row[72].strip() != '' and row[73].strip() != '':
 
