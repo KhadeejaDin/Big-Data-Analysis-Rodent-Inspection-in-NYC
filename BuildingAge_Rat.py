@@ -52,7 +52,7 @@ def mapToZone(parts):
     import pyproj #only to conver long lat to x y in feets
     import shapely.geometry as geom #only to convert (x,y) to Point (x y)
     proj = pyproj.Proj(init="epsg:2263", preserve_units=True)
-    index, zones = indexZones('Boroughs.csv')
+    index, zones = indexZones('boroughs.csv')
     #return zones.geometry
     for line in parts: #convert long lat to x y
         fields = line.strip().split(',')
