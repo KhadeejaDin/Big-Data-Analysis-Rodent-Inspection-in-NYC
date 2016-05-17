@@ -17,23 +17,25 @@ def indexZones(buildingfiles):  ##creates rtree
         #lines.next()
     dic ={}
     with open(buildingfiles,'rb') as f:
-        reader = csv.DictReader(f)
+        reader = csv.reader(f)
         inx =0
         for row in reader:
+            
         #if row[2]!='s':
-        #if row[0] =='Borough': continue
-            if row['YearBuilt'] !='0':
-                if row['XCoord'].strip() != '' and row['YCoord'].strip() != '':
+            if row[0] =='Borough': continue
+            if row[58] !='0':
+                if row[72].strip() != '' and row[73].strip() != '':
 
                     
-                    point  = geom.Point(float(row['XCoord']), float(row['YCoord']))  #point=POINT (1012703.999983049 255827.0144377612)
+                    point  = geom.Point(float(row[72]), float(row[73]))  #point=POINT (1012703.999983049 255827.0144377612)
                     g = point.buffer(20) # create a polygon,Polygon has a list of Points which correspond to polygon corners (self.corners)
             
                     index.insert(inx, g.bounds)
-                    dic[inx] = (row['YearBuilt'],g)
+                    dic[inx] = (row[58],g)
                     inx +=1
             
     return (index, dic)
+
 
 
 
