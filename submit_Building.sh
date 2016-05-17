@@ -5,7 +5,7 @@ OTHERS=(${@:$#-2})
 OUTPUT=${OTHERS[@]:0:1}
 LOCAL_OUTPUT=${OTHERS[@]:1:1}
 NUM_EXECS=${OTHERS[@]:2:1}
-NAME="BDMA Taxi Grouping"
+NAME="BuildingAge_Rat"
 
 HD=hadoop
 SP=spark-submit
