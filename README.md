@@ -32,6 +32,6 @@ Rdd = sc.textFile("Restautant_311/*.csv")   // Restautant_311 folder contains al
 
 ##Contributors:
 Khadeeja Din <br>
-Xue Wei Fan<br>
+Xue Wei Fan  josephxwf@gmail.com<br>
 Davide Libi-Bourne<br>
 John Settineri
