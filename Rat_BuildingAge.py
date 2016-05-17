@@ -17,7 +17,7 @@ def indexZones(buildingfiles):  ##creates rtree
         #lines.next()
     dic ={}
     with open(buildingfiles,'rb') as f:
-        reader = csv.reader(f)
+        reader = csv.DictReader(f)
         inx =0
         for row in reader:
             if row['YearBuilt'] !='0':
