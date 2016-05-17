@@ -49,6 +49,7 @@ def findZone(p, index, dic):
 
 
 
+
 def mapToZone(parts):
     import pyproj #only to conver long lat to x y in feets
     import shapely.geometry as geom #only to convert (x,y) to Point (x y)
@@ -66,7 +67,6 @@ def mapToZone(parts):
 
 
 
-
 if __name__=='__main__':
     if len(sys.argv)<3:
         print "Usage: <input files> <output path>"
@@ -80,3 +80,6 @@ if __name__=='__main__':
     trips = lines.filter(lambda x: not x.startswith('Unique Key') and x != '')   
     output = trips.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
     output.saveAsTextFile(sys.argv[-1])
+    
+    
+    
