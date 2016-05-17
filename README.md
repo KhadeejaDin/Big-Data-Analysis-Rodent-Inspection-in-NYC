@@ -12,7 +12,7 @@
 
 ## Commands used to run this big data project:
 #### Commands used to connect to NYU Cusp cluster:
-ssh [YourCuspID]@gw.cusp.nyu.edu
+ssh [YourCuspID]@gw.cusp.nyu.edu<br>
 ssh cluster.cusp.nyu.edu <br>
 git clone https://github.com/KhadeejaDin/Big-Data-Analysis-Rodent-Inspection-in-NYC.git<br>
 cd Big-Data-Analysis-Rodent-Inspection-in-NYC/<br>
