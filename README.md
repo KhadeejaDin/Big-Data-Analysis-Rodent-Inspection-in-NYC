@@ -5,6 +5,7 @@
 
 </p>
 
+![alt tag](/virus.gif)
 
 ## Commands used to run this big data project:
 #### Commands used to connect to NYU Cusp cluster:
