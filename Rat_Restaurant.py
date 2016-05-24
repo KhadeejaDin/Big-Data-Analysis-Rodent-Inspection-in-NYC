@@ -66,12 +66,13 @@ if __name__=='__main__':
         sys.exit(-1)
 
     sc = pyspark.SparkContext()
-
-    call = sc.textFile(','.join(sys.argv[1]))
+    # read 311 call dataset and map calls to neighborhoods, finally count the number of calls in each neighborhoods.
+    call = sc.textFile(sys.argv[1])
     call = call.filter(lambda x: not x.startswith('Unique Key') and x != '')
     callOuput = call.mapPartitions(mapToZone2).reduceByKey(lambda a, b: a+b) 
     
-    restaurant = sc.textFile(','.join(sys.argv[2]), use_unicode=False)
+     # read restaurant dataset and map restaurants to neighborhoods, finally count the number of restaurants in each neighborhoods.
+    restaurant = sc.textFile(sys.argv[2], use_unicode=False)
     restaurantOutput = restaurant.mapPartitions(mapToZone).reduceByKey(lambda a, b: a+b)
   
     joinResult = callOuput.join(restaurantOutput)
