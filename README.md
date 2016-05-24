@@ -1,5 +1,6 @@
 # Big-Data-Analysis-Rodent-Inspection-in-NYC 
 
+##Motivatuion:
 <p>
     Rodents and other pests are often a big problem for businesses in New York City. Pest complaints often lead to poor Health Inspection grades, poor customer satisfaction, and poor food hygiene. The goal of this project is to track their locations in NYC neighboorhoods by using the New York City 311 complaint data and sorting it for rodent inspections. Once we find the neighborhoods that rodents often congregate, the project will focus on creating a heatmap of the most common locations for rodents in the city. Hopefully, when businesses move to other neighboorhoods, they will use this data to see whether or not the area is optimal due to high rodent populations. 
 
@@ -13,7 +14,30 @@
    * To predict the rat migration.
    * To predict future rat prone area.
 
- 
+##Purpose:
+* House buyers can have a better insight.
+* tenants can have a better insight and prevent rats entering their house.
+* Government can take action on reducing rat populaton in the right area.
+
+##Tasks:
+* Study rat compaint 311 calls in New York city.
+* Study rat distribution changes in the past five years.
+* Find the correlation between rats and subway stations.
+* Find the correlation between rats and restaurants.
+* Find the correlation between rats and building age.
+
+##Data Sources:
+* 311 Service Requests from 2010 to Present (6.4 GB of structured data as csv file)
+   * https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
+* Rodent Inspection (225 MB of structured data as csv file) 
+   * https://data.cityofnewyork.us/Health/Rodent-Inspection/p937-wjvj
+* DOHMH New York City Restaurant Inspection Results (100 MB of structured data as csv file)  
+   * https://nycopendata.socrata.com/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/xx67-kt59
+* Age of New York City buildings (200 MB of structured data as csv file) 
+   * http://www1.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page
+* Name and location of all subway stations (50 KB of structured dats as csv file) 
+   * https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49
+
 
 
 
