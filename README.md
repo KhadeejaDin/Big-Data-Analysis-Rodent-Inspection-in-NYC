@@ -7,11 +7,11 @@
 
 ##Objective:
 
-*Short-term objective: 
-   *To identify the rat prone area in New York city.
-*Long-term objective:
-   *To predict the rat migration.
-   *To predict future rat prone area.
+* Short-term objective: 
+   * To identify the rat prone area in New York city.
+* Long-term objective:
+   * To predict the rat migration.
+   * To predict future rat prone area.
 
  
 
