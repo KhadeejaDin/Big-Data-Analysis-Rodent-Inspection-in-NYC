@@ -19,10 +19,13 @@ cd Big-Data-Analysis-Rodent-Inspection-in-NYC/<br>
 chmod 777 submit_Subway.sh<br>
 chmod 777 submit_Building.sh<br>
 chmod 777 submit_Restaurant.sh<br>
+<hr>
 ./submit_Subway.sh subway.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_Subway_Rat Subway_Rat.txt 32<br>
+<hr>
 ./submit_Building.sh Mn_BuildingAge_Rat.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_BuildingAge_Rat BuildingAge_Rat.txt 22<br>
+<hr>
 ./submit_Restaurant.sh Rat_Restaurant.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv /gws/classes/bdma/ccny/groups/8/NYCRestaurantsGeocoded.csv output_Restaurant_311call Restaurant_311call.txt 64
-
+<hr>
 ## Other commands used for handling files merge or read:
 #### Command to mereg csv files:
 cat *.csv >merge.csv
