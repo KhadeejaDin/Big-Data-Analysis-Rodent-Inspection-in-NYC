@@ -38,7 +38,7 @@
 * Name and location of all subway stations (50 KB of structured dats as csv file) 
    * https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49
 
-The photo shows all the datasets we used on the NYU cusp big data server:
+The photo below shows all the datasets we used on the NYU cusp big data server:
 ![alt tag](image/dataFiles.png)
 
 
@@ -62,13 +62,13 @@ chmod 777 submit_Restaurant.sh<br>
 <hr>
 ./submit_Subway.sh subway.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_Subway_Rat Subway_Rat.txt 32<br>
 <hr>
-The picture below shows part of the running result:
+The photo below shows part of the running result:
 ![alt tag](image/Subway_Rat_Result.png)
 ./submit_Building.sh Mn_BuildingAge_Rat.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_BuildingAge_Rat BuildingAge_Rat.txt 22<br>
 <hr>
 ./submit_Restaurant.sh Rat_Restaurant.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv /gws/classes/bdma/ccny/groups/8/NYCRestaurantlocations.csv output_Restaurant_311call Restaurant_311call.txt 64
 <hr>
-The picture below shows part of the Running Result:
+The photo below shows part of the Running Result:
 ![alt tag](image/Restaurant_Rat_Result.png)
 ## Other commands used for handling files merge or read:
 #### Command to mereg csv files:
