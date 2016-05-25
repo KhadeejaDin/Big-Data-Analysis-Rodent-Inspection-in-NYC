@@ -60,11 +60,13 @@ chmod 777 submit_Restaurant.sh<br>
 <hr>
 ./submit_Subway.sh subway.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_Subway_Rat Subway_Rat.txt 32<br>
 <hr>
+Part of the running result:
+![alt tag](image/Subway_Rat_Result.png)
 ./submit_Building.sh Mn_BuildingAge_Rat.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv output_BuildingAge_Rat BuildingAge_Rat.txt 22<br>
 <hr>
 ./submit_Restaurant.sh Rat_Restaurant.py /gws/classes/bdma/ccny/groups/8/311_Service_Requests_from_2010_to_Present.csv /gws/classes/bdma/ccny/groups/8/NYCRestaurantlocations.csv output_Restaurant_311call Restaurant_311call.txt 64
 <hr>
-Running Result:
+Part of the Running Result:
 ![alt tag](image/Restaurant_Rat_Result.png)
 ## Other commands used for handling files merge or read:
 #### Command to mereg csv files:
