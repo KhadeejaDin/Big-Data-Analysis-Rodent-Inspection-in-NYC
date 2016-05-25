@@ -44,11 +44,6 @@ The photo below shows all the datasets we used on the NYU cusp big data server:
 
 
 
-## Chart from our final result shows the positive correlation between number of restaurants and 311 call complaints for rats in neighborhood
-![alt tag](image/Restaurant_VS_Rat.png)
-
-## Chart from our final result shows the positive correlation between building age and number of 311 call complaints for rats in New York city
-![alt tag](image/BuildingAge_VS_Rat.png)
 
 ## Commands used to run this big data project:
 #### Commands used to connect to NYU Cusp cluster:
@@ -70,6 +65,15 @@ The photo below shows part of the running result:
 <hr>
 The photo below shows part of the Running Result:
 ![alt tag](image/Restaurant_Rat_Result.png)
+
+## Chart below from the final result shows the positive correlation between number of restaurants and 311 call complaints for rats in neighborhood
+![alt tag](image/Restaurant_VS_Rat.png)
+
+## Chart beow from the final result shows the positive correlation between building age and number of 311 call complaints for rats in New York city
+![alt tag](image/BuildingAge_VS_Rat.png)
+
+
+
 ## Other commands used for handling files merge or read:
 #### Command to mereg csv files:
 cat *.csv >merge.csv
