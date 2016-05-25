@@ -38,6 +38,8 @@
 * Name and location of all subway stations (50 KB of structured dats as csv file) 
    * https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49
 
+The photo shows all the datasets we used on the NYU cusp big data server:
+![alt tag](image/dataFiles.png)
 
 
 
